@@ -9,17 +9,17 @@
 // --------------------------------------------------------------------------------------------------------------------------------
 
 // number of steps
-int const N = (int)1e6;
+int const N = (int)3e6;
 // diffusion coefficient (= kT <--> mu = 1)
 double const D = 1.5;
 // coefficient for the potential
-double const alpha = 0.1;
+double const alpha = 1;
 // initial condition
 double const x0 = 100.;
 // stepsize
-double const eps = 10;
+double const eps = 0.01;
 // filen name
-std::string fileName = "data0.txt";
+std::string fileName = "data3.txt";
 
 // --------------------------------------------------------------------------------------------------------------------------------
 
@@ -55,7 +55,7 @@ auto PotentialDerivative = [&](double const &x, double const &alpha)
 // stepper
 auto Stepper = [&](double &x, double const &eps, double const &alpha, double const &D) {
     // update x value
-    x += -PotentialDerivative(x, alpha) + GaussianNoise(D, eps);
+    x += -PotentialDerivative(x, alpha) * eps + GaussianNoise(D, eps);
 };
 
 // --------------------------------------------------------------------------------------------------------------------------------
