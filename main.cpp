@@ -24,7 +24,7 @@ std::string fileName = "data3.txt";
 // --------------------------------------------------------------------------------------------------------------------------------
 
 // draw from normal distribution to generate uncorrelatex random noise (eta)
-auto GaussianNoise = [&](double const &D, double const &eps) {
+auto GaussianNoise = [](double const &D, double const &eps) {
     // random number generation
     std::random_device rd{};
     std::mt19937 gen(rd());
@@ -38,7 +38,7 @@ auto GaussianNoise = [&](double const &D, double const &eps) {
 // --------------------------------------------------------------------------------------------------------------------------------
 
 // derivative of V potential
-auto PotentialDerivative = [&](double const &x, double const &alpha)
+auto PotentialDerivative = [](double const &x, double const &alpha)
 {
     // separate cases
     if (x < 0.)
@@ -53,7 +53,7 @@ auto PotentialDerivative = [&](double const &x, double const &alpha)
 // --------------------------------------------------------------------------------------------------------------------------------
 
 // stepper
-auto Stepper = [&](double &x, double const &eps, double const &alpha, double const &D) {
+auto Stepper = [](double &x, double const &eps, double const &alpha, double const &D) {
     // update x value
     x += -PotentialDerivative(x, alpha) * eps + GaussianNoise(D, eps);
 };
